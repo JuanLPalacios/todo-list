@@ -1,14 +1,32 @@
-import _ from 'lodash';
 import './style.css';
 
-function component() {
-  const element = document.createElement('div');
+const todo = [
+  {
+    description: 'List structure.',
+    completed: false,
+    index: 0,
+  },
+  {
+    description: 'Interactive list.',
+    completed: false,
+    index: 1,
+  },
+  {
+    description: 'Add and remove items.',
+    completed: false,
+    index: 2,
+  },
+];
 
-  // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
-
-  return element;
+function update() {
+  document.getElementById('list').innerHTML = todo.sort((a, b) => a.index - b.index).map((item, i) => `
+  <li class="todo-li">
+    <input type="checkbox" id="chk-${i}" ${item.completed ? 'checked' : ''}>
+    <label for="chk-${i}"></label>
+    <input type="text" id="txt-${i}" value="${item.description}" >
+    <label for="txt-${i}">${item.description}</label>
+    <span class="handle"></span>
+  </li>`).join('');
 }
 
-document.body.appendChild(component()); 
+update();
