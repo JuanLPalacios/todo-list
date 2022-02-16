@@ -1,3 +1,150 @@
+* { box-sizing: border-box; }
+
 body {
-    background-color: bisque;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.todo {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 5px 3px rgb(0 0 0 / 10%);
+}
+
+.todo > header,
+.todo > button,
+.todo-li,
+.todo > form > * {
+  padding: 11px;
+  border: none;
+  background-color: #fff;
+  border-bottom: solid 1px #ddd;
+  outline: none;
+}
+
+li.todo-li { display: flex; }
+
+li.todo-li [type=text] {
+  position: absolute;
+  left: 100vw;
+  border: none;
+  outline: none;
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  padding: 0;
+  flex: 1 1 auto;
+}
+
+li.todo-li [type=text] + label {
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  padding: 0;
+  padding-top: 2px;
+  flex: 1 1 auto;
+}
+
+li.todo-li [type=text]:focus {
+  position: static;
+  left: 0;
+}
+
+li.todo-li [type=checkbox] + label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: solid 1px #555;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+
+li.todo-li [type=text]:focus + label {
+  display: none;
+}
+
+li.todo-li [type=checkbox] { display: none; }
+
+li.todo-li [type=checkbox]:checked + label {
+  border: none;
+}
+
+li.todo-li [type=checkbox]:checked + label::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  width: 7px;
+  height: 15px;
+  border: solid 2px rgb(0, 4, 255);
+  border-width: 0 2px 2px 0;
+  border-radius: 3px;
+  transform: translate(3px, -3px) rotate(45deg);
+}
+
+li.todo-li [type=checkbox]:checked ~ label {
+  text-decoration: line-through;
+  color: #999;
+}
+
+li.todo-li .handle {
+  cursor: move;
+}
+
+li.todo-li .handle::before {
+  content: ' ';
+  display: inline-block;
+  background-image: url("imgs/re-order-dots.svg");
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+}
+
+button#clear-all {
+  color: #777;
+  background: #eee;
+}
+
+main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+  overflow: hidden;
+}
+
+.todo > form {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.todo > form > input {
+  flex: 1 1 auto;
+}
+
+.todo > form > button {
+  width: 38px;
+  font-size: 0;
+}
+
+.todo > form > button::before {
+  content: ' ';
+  display: inline-block;
+  background-image: url("imgs/text-new-line.svg");
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+}
+
+.todo > form img {
+  width: 100%;
+}
+
+#list {
+  margin: 0 0 0 0;
+  padding: 0;
+  list-style: none;
 }
