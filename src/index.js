@@ -1,14 +1,19 @@
-import _ from 'lodash';
 import './style.css';
 
-function component() {
-  const element = document.createElement('div');
-
-  // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
-
-  return element;
-}
-
-document.body.appendChild(component()); 
+const todo = [
+  {
+    description: 'List structure.',
+    completed: false,
+    index: 0,
+  },
+  {
+    description: 'Interactive list.',
+    completed: false,
+    index: 1,
+  },
+  {
+    description: 'Add and remove items.',
+    completed: false,
+    index: 2,
+  },
+];
