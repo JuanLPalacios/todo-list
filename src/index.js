@@ -22,21 +22,27 @@ function update() {
       remove(element, todo);
       update();
     });
+    li.querySelector(`#txt-${i}`).addEventListener('keydown', (e) => {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        e.target.blur();
+      }
+    });
     li.querySelector(`#txt-${i}`).addEventListener('blur', (e) => {
       editDescription(element, e.target.value);
       save(todo);
       update();
-      e.preventDefault();
-      document.forms[0].reset();
     });
   });
 }
 
 update();
 
-document.forms[0].addEventListener('submit', () => {
+document.forms[0].addEventListener('submit', (e) => {
   const temp = {};
   new FormData(document.forms[0]).forEach((value, key) => { temp[key] = value; });
   add(temp, todo);
   update();
+  e.preventDefault();
+  document.forms[0].reset();
 });
