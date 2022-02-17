@@ -124,9 +124,14 @@ li.todo-li .delete::before {
   height: 16px;
 }
 
-button#clear-all {
+#clear-all {
   color: #777;
   background: #eee;
+}
+
+#clear-all:hover {
+  color: #666;
+  background: #f1f1f1;
 }
 
 main {
