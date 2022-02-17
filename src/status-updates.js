@@ -5,7 +5,7 @@ export function statusUpdate(element, completed) {
 }
 
 export function clearAllCompleted(list) {
-  [].filter((task) => !task.completed).forEach((task) => {
+  list.filter((task) => task.completed).forEach((task) => {
     remove(task, list);
   });
   save(list);

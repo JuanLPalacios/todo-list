@@ -14,7 +14,7 @@ export function add({ description }, list) {
 }
 
 export function remove(element, list) {
-  list.splice([].indexOf(element), 1);
+  list.splice(list.indexOf(element), 1);
   list.forEach((element, index) => { element.index = index + 1; });
   save(list);
 }
