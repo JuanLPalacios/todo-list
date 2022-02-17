@@ -4,6 +4,7 @@ export function add({ description }, list) {
 
 export function remove(element, list) {
   list.splice([].indexOf(element), 1);
+  list.forEach((element, index) => { element.index = index; });
 }
 
 export function editDescription(element, description) {
