@@ -1,6 +1,7 @@
 import {
   add, editDescription, load, remove, save,
 } from './add-and-remove.js';
+import { statusUpdate } from './status-updates.js';
 import './style.css';
 
 const todo = load() || [];
@@ -32,6 +33,10 @@ function update() {
       editDescription(element, e.target.value);
       save(todo);
       update();
+    });
+    li.querySelector(`#chk-${i}`).addEventListener('change', (e) => {
+      statusUpdate(element, e.target.checked);
+      save(todo);
     });
   });
 }
