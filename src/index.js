@@ -1,6 +1,7 @@
 import {
   add, editDescription, load, remove, save,
 } from './add-and-remove.js';
+import { clearAllCompleted, statusUpdate } from './status-updates.js';
 import './style.css';
 
 const todo = load() || [];
@@ -33,6 +34,10 @@ function update() {
       save(todo);
       update();
     });
+    li.querySelector(`#chk-${i}`).addEventListener('change', (e) => {
+      statusUpdate(element, e.target.checked);
+      save(todo);
+    });
   });
 }
 
@@ -45,4 +50,8 @@ document.forms[0].addEventListener('submit', (e) => {
   update();
   e.preventDefault();
   document.forms[0].reset();
+});
+document.getElementById('clear-all').addEventListener('click', () => {
+  clearAllCompleted(todo);
+  update();
 });
