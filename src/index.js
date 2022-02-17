@@ -1,7 +1,9 @@
-import { add, editDescription, remove } from './add-and-remove';
+import {
+  add, editDescription, load, remove, save,
+} from './add-and-remove';
 import './style.css';
 
-const todo = [];
+const todo = load() || [];
 
 function update() {
   const list = document.getElementById('list');
@@ -22,6 +24,7 @@ function update() {
     });
     li.querySelector(`#txt-${i}`).addEventListener('blur', (e) => {
       editDescription(element, e.target.value);
+      save(todo);
       update();
     });
   });
