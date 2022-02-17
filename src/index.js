@@ -1,7 +1,7 @@
 import {
   add, editDescription, load, remove, save,
 } from './add-and-remove.js';
-import { statusUpdate } from './status-updates.js';
+import { clearAllCompleted, statusUpdate } from './status-updates.js';
 import './style.css';
 
 const todo = load() || [];
@@ -50,4 +50,8 @@ document.forms[0].addEventListener('submit', (e) => {
   update();
   e.preventDefault();
   document.forms[0].reset();
+});
+document.getElementById('clear-all').addEventListener('click', () => {
+  clearAllCompleted(todo);
+  update();
 });
