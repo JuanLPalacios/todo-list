@@ -1,6 +1,6 @@
 import {
   add, editDescription, load, remove, save,
-} from './add-and-remove';
+} from './add-and-remove.js';
 import './style.css';
 
 const todo = load() || [];
@@ -26,6 +26,8 @@ function update() {
       editDescription(element, e.target.value);
       save(todo);
       update();
+      e.preventDefault();
+      document.forms[0].reset();
     });
   });
 }
