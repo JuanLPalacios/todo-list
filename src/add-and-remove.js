@@ -9,13 +9,13 @@ export function load() {
 }
 
 export function add({ description }, list) {
-  list.push({ description, completed: false, index: list.length });
+  list.push({ description, completed: false, index: list.length + 1 });
   save(list);
 }
 
 export function remove(element, list) {
   list.splice([].indexOf(element), 1);
-  list.forEach((element, index) => { element.index = index; });
+  list.forEach((element, index) => { element.index = index + 1; });
   save(list);
 }
 
