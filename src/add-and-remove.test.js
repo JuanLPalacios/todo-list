@@ -18,4 +18,9 @@ describe('add({ description }, list)', () => {
     add({ description: 'hello world' }, list);
     expect(list).toStrictEqual([{ description: 'hello world', completed: false, index: 1 }]);
   });
+  it('if there are previous items the new one should have an index of the array lenght', () => {
+    const list = [{}, {}, {}];
+    add({ description: 'hello world' }, list);
+    expect(list[list.length - 1].index).toBe(list.length);
+  });
 });
