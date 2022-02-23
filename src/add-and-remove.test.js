@@ -1,4 +1,4 @@
-import { add, remove } from './add-and-remove';
+import { add, remove } from './add-and-remove.js';
 
 global.localStorage = {
   state: {
@@ -29,7 +29,7 @@ describe('remove({ description }, list)', () => {
   it('should remove an element', () => {
     const list = [];
     add({ description: 'hello world' }, list);
-    remove({ description: 'hello world' }, list)
+    remove({ description: 'hello world' }, list);
     expect(list).toStrictEqual([]);
   });
   it('If remove function exists', () => {
@@ -42,7 +42,7 @@ describe('remove({ description }, list)', () => {
     add({ description: 'hello mars' }, list);
     add({ description: 'hello Jupiter' }, list);
 
-    remove({ description: 'hello world' }, list)
+    remove({ description: 'hello world' }, list);
 
     expect(list[0].index).toBe(1);
     expect(list[1].index).toBe(2);
