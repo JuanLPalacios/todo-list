@@ -55,6 +55,7 @@ li.todo-li [type=text]:focus {
 
 li.todo-li [type=checkbox] + label {
   display: inline-block;
+  position: relative;
   width: 15px;
   height: 15px;
   border: solid 1px #555;
