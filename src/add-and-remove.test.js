@@ -1,4 +1,5 @@
-import { add, remove } from './add-and-remove.js';
+import { add, remove, editDescription } from './add-and-remove.js';
+import { clearAllCompleted, statusUpdate } from './status-updates.js';
 
 global.localStorage = {
   state: {
@@ -46,5 +47,13 @@ describe('remove({ description }, list)', () => {
 
     expect(list[0].index).toBe(1);
     expect(list[1].index).toBe(2);
+  });
+});
+
+describe('editDescription(task, description)', () => {
+  it('should edit the description of a task ', () => {
+    const task = { description: 'hello world', index: 1, completed: false };
+    editDescription(task, 'test value');
+    expect(task).toStrictEqual({ description: 'test value', completed: false, index: 1 });
   });
 });
