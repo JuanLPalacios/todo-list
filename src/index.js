@@ -26,6 +26,7 @@ function update() {
     const checkbox = li.querySelector(`#chk-${i}`);
     // add delete event
     deleteBtn.addEventListener('mousedown', () => {
+      console.log('helllo here');
       remove(task, todo, '');
       update();
     });

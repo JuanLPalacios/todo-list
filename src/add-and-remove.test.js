@@ -4,6 +4,12 @@
 import { add, remove, editDescription, save, load } from './add-and-remove.js';
 import { clearAllCompleted, statusUpdate } from './status-updates.js';
 
+function triggerMouseEvent (node, eventType) {
+    var clickEvent = document.createEvent ('MouseEvents');
+    clickEvent.initEvent (eventType, true, true);
+    node.dispatchEvent (clickEvent);
+}
+
 global.localStorage = {
   state: {
     'access-token': 'superHashedString',
@@ -127,7 +133,11 @@ describe('DOM manipulation', () => {
     expect(document.getElementById('list').querySelectorAll('li').length).toBe(1);
   
   });
-
+  it('remove new element', () => {
+    triggerMouseEvent(document.querySelector('li .delete'),'mousedown');
+    expect(document.getElementById('list').querySelectorAll('li').length).toBe(0);
+  
+  });
   
 
 });
