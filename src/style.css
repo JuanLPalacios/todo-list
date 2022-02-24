@@ -42,6 +42,10 @@ li.todo-li [type=text] + label {
   padding: 0;
   padding-top: 2px;
   flex: 1 1 auto;
+  max-width: calc(100% - 41px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 li.todo-li [type=text]:focus {
@@ -175,7 +179,9 @@ main {
 }
 
 #list {
-  margin: 0 0 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
+  max-height: calc(100vh - 225px);
+  overflow-y: auto;
 }

@@ -5,6 +5,8 @@ import { clearAllCompleted, statusUpdate } from './status-updates.js';
 import './style.css';
 
 const todo = load() || [];
+const form = document.forms[0];
+const clearAll = document.getElementById('clear-all');
 
 function update() {
   const list = document.getElementById('list');
@@ -18,24 +20,31 @@ function update() {
     <button class="delete"></button>
   </li>`).join('');
   list.querySelectorAll('li').forEach((li, i) => {
-    const element = todo[i];
-    li.querySelector('.delete').addEventListener('mousedown', () => {
-      remove(element, todo);
+    const task = todo[i];
+    const deleteBtn = li.querySelector('.delete');
+    const descriptionInput = li.querySelector(`#txt-${i}`);
+    const checkbox = li.querySelector(`#chk-${i}`);
+    // add delete event
+    deleteBtn.addEventListener('mousedown', () => {
+      remove(task, todo);
       update();
     });
-    li.querySelector(`#txt-${i}`).addEventListener('keydown', (e) => {
+    // prevent submit when enter key pressed insed go to blur
+    descriptionInput.addEventListener('keydown', (e) => {
       if (e.keyCode === 13) {
         e.preventDefault();
         e.target.blur();
       }
     });
-    li.querySelector(`#txt-${i}`).addEventListener('blur', (e) => {
-      editDescription(element, e.target.value);
+    // if input is left or redirecte here by enter then edit and save
+    descriptionInput.addEventListener('blur', (e) => {
+      editDescription(task, e.target.value);
       save(todo);
       update();
     });
-    li.querySelector(`#chk-${i}`).addEventListener('change', (e) => {
-      statusUpdate(element, e.target.checked);
+    // on checkbox cange updave value and save
+    checkbox.addEventListener('change', (e) => {
+      statusUpdate(task, e.target.checked);
       save(todo);
     });
   });
@@ -43,15 +52,15 @@ function update() {
 
 update();
 
-document.forms[0].addEventListener('submit', (e) => {
-  const temp = {};
-  new FormData(document.forms[0]).forEach((value, key) => { temp[key] = value; });
-  add(temp, todo);
+form.addEventListener('submit', (e) => {
+  const newTask = {};
+  new FormData(form).forEach((value, key) => { newTask[key] = value; });
+  add(newTask, todo);
   update();
   e.preventDefault();
-  document.forms[0].reset();
+  form.reset();
 });
-document.getElementById('clear-all').addEventListener('click', () => {
+clearAll.addEventListener('click', () => {
   clearAllCompleted(todo);
   update();
 });
