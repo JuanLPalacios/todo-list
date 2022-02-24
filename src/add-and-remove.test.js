@@ -1,4 +1,7 @@
-import { add, remove, editDescription } from './add-and-remove.js';
+/**
+ * @jest-environment jsdom
+ */
+import { add, remove, editDescription, save, load } from './add-and-remove.js';
 import { clearAllCompleted, statusUpdate } from './status-updates.js';
 
 global.localStorage = {
@@ -79,5 +82,25 @@ describe('clearAllCompleted(list)', () => {
     clearAllCompleted(list);
 
     expect(list).toStrictEqual([{ description: 'hello mars', index: 1, completed: false }]);
+  });
+});
+
+describe('save(list)', () => {
+  it('should store the list value', () => {
+    const list = [];
+    add({ description: 'hello world' }, list);
+    add({ description: 'hello mars' }, list);
+    add({ description: 'hello Jupiter' }, list);
+    save(list);
+    expect(localStorage.getItem('todo')).toBe(JSON.stringify(list));
+  });
+});
+
+describe('load()', () => {
+  it('should retrive the list value', () => {
+    const list = [];
+    add({ description: 'hello mars' }, list);
+    save(list);
+    expect(load()).toStrictEqual([{ description: 'hello mars', index: 1, completed: false }]);
   });
 });
