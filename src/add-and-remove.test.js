@@ -104,3 +104,31 @@ describe('load()', () => {
     expect(load()).toStrictEqual([{ description: 'hello mars', index: 1, completed: false }]);
   });
 });
+
+describe('DOM manipulation', () => {
+  document.body.innerHTML=`<main>
+        <h1>To Do List</h1>
+        <div class="todo">
+            <header>Today's To-Do List</header>
+            <form>
+                <input type="text" name="description">
+                <button>add item</button>
+            </form>
+            <ul id="list">
+            </ul>
+            <button id="clear-all">Clear all completed</button>
+        </div>
+    </main>`;
+    save([]);
+    require('./index.js');
+
+  it('add new element', () => {
+    document.forms[0].submit()
+    expect(document.getElementById('list').querySelectorAll('li').length).toBe(1);
+  
+  });
+
+  
+
+});
+
