@@ -1,13 +1,15 @@
 /**
  * @jest-environment jsdom
  */
-import { add, remove, editDescription, save, load } from './add-and-remove.js';
+import {
+  add, remove, editDescription, save, load,
+} from './add-and-remove.js';
 import { clearAllCompleted, statusUpdate } from './status-updates.js';
 
-function triggerMouseEvent (node, eventType) {
-    var clickEvent = document.createEvent ('MouseEvents');
-    clickEvent.initEvent (eventType, true, true);
-    node.dispatchEvent (clickEvent);
+function triggerMouseEvent(node, eventType) {
+  const clickEvent = document.createEvent('MouseEvents');
+  clickEvent.initEvent(eventType, true, true);
+  node.dispatchEvent(clickEvent);
 }
 
 global.localStorage = {
@@ -112,7 +114,7 @@ describe('load()', () => {
 });
 
 describe('DOM manipulation', () => {
-  document.body.innerHTML=`<main>
+  document.body.innerHTML = `<main>
         <h1>To Do List</h1>
         <div class="todo">
             <header>Today's To-Do List</header>
@@ -125,28 +127,23 @@ describe('DOM manipulation', () => {
             <button id="clear-all">Clear all completed</button>
         </div>
     </main>`;
-    save([{ description: 'hello mars', index: 1, completed: true },
-          { description: 'hello uranus', index: 2, completed: true },
-          { description: 'hello jupiter', index: 3, completed: true }
-        ]);
-    require('./index.js');
+  save([{ description: 'hello mars', index: 1, completed: true },
+    { description: 'hello uranus', index: 2, completed: true },
+    { description: 'hello jupiter', index: 3, completed: true },
+  ]);
+  // eslint-disable-next-line global-require
+  require('./index.js');
   it('clearAll element', () => {
     document.querySelector('#clear-all').click();
     expect(document.getElementById('list').querySelectorAll('li').length).toBe(0);
-  
   });
 
   it('add new element', () => {
-    document.forms[0].submit()
+    document.forms[0].submit();
     expect(document.getElementById('list').querySelectorAll('li').length).toBe(1);
-  
   });
   it('remove element', () => {
-    triggerMouseEvent(document.querySelector('li .delete'),'mousedown');
+    triggerMouseEvent(document.querySelector('li .delete'), 'mousedown');
     expect(document.getElementById('list').querySelectorAll('li').length).toBe(0);
-  
   });
-  
-
 });
-
