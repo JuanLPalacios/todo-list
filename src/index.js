@@ -26,7 +26,7 @@ function update() {
     const checkbox = li.querySelector(`#chk-${i}`);
     // add delete event
     deleteBtn.addEventListener('mousedown', () => {
-      remove(task, todo);
+      remove(task, todo, '');
       update();
     });
     // prevent submit when enter key pressed insed go to blur
