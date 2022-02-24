@@ -125,15 +125,23 @@ describe('DOM manipulation', () => {
             <button id="clear-all">Clear all completed</button>
         </div>
     </main>`;
-    save([]);
+    save([{ description: 'hello mars', index: 1, completed: true },
+          { description: 'hello uranus', index: 2, completed: true },
+          { description: 'hello jupiter', index: 3, completed: true }
+        ]);
     require('./index.js');
+  it('clearAll element', () => {
+    document.querySelector('#clear-all').click();
+    expect(document.getElementById('list').querySelectorAll('li').length).toBe(0);
+  
+  });
 
   it('add new element', () => {
     document.forms[0].submit()
     expect(document.getElementById('list').querySelectorAll('li').length).toBe(1);
   
   });
-  it('remove new element', () => {
+  it('remove element', () => {
     triggerMouseEvent(document.querySelector('li .delete'),'mousedown');
     expect(document.getElementById('list').querySelectorAll('li').length).toBe(0);
   
