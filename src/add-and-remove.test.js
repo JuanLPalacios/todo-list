@@ -57,3 +57,11 @@ describe('editDescription(task, description)', () => {
     expect(task).toStrictEqual({ description: 'test value', completed: false, index: 1 });
   });
 });
+
+describe('statusUpdate(element, completed)', () => {
+  it('should update the status of a task ', () => {
+    const task = { description: 'hello world', index: 1, completed: false };
+    statusUpdate(task, true)
+    expect(task).toStrictEqual({ description: 'hello world', completed: true, index: 1 });
+  });
+});
