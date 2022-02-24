@@ -61,7 +61,23 @@ describe('editDescription(task, description)', () => {
 describe('statusUpdate(element, completed)', () => {
   it('should update the status of a task ', () => {
     const task = { description: 'hello world', index: 1, completed: false };
-    statusUpdate(task, true)
+    statusUpdate(task, true);
     expect(task).toStrictEqual({ description: 'hello world', completed: true, index: 1 });
+  });
+});
+
+describe('clearAllCompleted(list)', () => {
+  it('should remove all completed tasks', () => {
+    const list = [];
+    add({ description: 'hello world' }, list);
+    add({ description: 'hello mars' }, list);
+    add({ description: 'hello Jupiter' }, list);
+
+    statusUpdate(list[0], true);
+    statusUpdate(list[2], true);
+
+    clearAllCompleted(list);
+
+    expect(list).toStrictEqual([{ description: 'hello mars', index: 1, completed: false }]);
   });
 });
