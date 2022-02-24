@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "webpack serve --mode development --open",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "gh-pages": "run build && git add dist && git commit -m \"Update version\" && git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
     "type": "git",
